@@ -10,8 +10,8 @@ const { allProductsList } = require('../models/mocks/products.model.mock');
 //   allProdOk,
 // } = require('./mocks/products.service.mock');
 
-describe('listagem de pessoas passageiras', function () {
-  it('retorna a lista completa de pessoas passageiras', async function () {
+describe('listagem de produtos', function () {
+  it('retorna a lista completa de produtos', async function () {
     // arrange
     sinon.stub(productsModel, 'findAll').resolves(allProductsList);
       
@@ -33,7 +33,7 @@ describe('listagem de pessoas passageiras', function () {
     expect(result.message).to.equal('"id" must be a number');
   });
 
-  it('retorna um erro caso a pessoa passageira não existe', async function () {
+  it('retorna um erro caso o produto não existe', async function () {
     // arrange
     sinon.stub(productsModel, 'findById').resolves(undefined);
    
@@ -45,7 +45,7 @@ describe('listagem de pessoas passageiras', function () {
     expect(result.message).to.equal('Product not found');
   });
   
-  it('retorna a pessoa passageira caso ID existente', async function () {
+  it('retorna o produto caso ID existente', async function () {
     // arrange
     sinon.stub(productsModel, 'findById').resolves(allProductsList[0]);
     
