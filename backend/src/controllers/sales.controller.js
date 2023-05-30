@@ -1,17 +1,17 @@
-const { productsService } = require('../services');
+const { salesService } = require('../services');
 const errorMap = require('../utils/errorMap');
 
-const listProducts = async (_req, res) => {
-  const { type, message } = await productsService.findAll();
+const listSales = async (_req, res) => {
+  const { type, message } = await salesService.findAll();
 
   if (type) return res.status(errorMap.mapError(type)).json(message);
 
   res.status(200).json(message);
 };
 
-const getProduct = async (req, res) => {
+const getSale = async (req, res) => {
   const { id } = req.params;
-  const { type, message } = await productsService.findById(id);
+  const { type, message } = await salesService.findById(id);
 
   if (type) return res.status(errorMap.mapError(type)).json({ message });
 
@@ -19,6 +19,6 @@ const getProduct = async (req, res) => {
 };
 
 module.exports = {
-  listProducts,
-  getProduct,
+  listSales,
+  getSale,
 };
