@@ -6,4 +6,15 @@ const findAll = async () => {
   return result;
 };
 
-module.exports = { findAll };
+const findById = async (productId) => {
+  const [[product]] = await connection.execute(
+      'SELECT * FROM products WHERE id = ? ORDER BY id asc',
+      [productId],
+  );
+  return product;
+};
+
+module.exports = {
+  findAll,
+  findById,
+};

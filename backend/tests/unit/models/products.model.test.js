@@ -15,6 +15,15 @@ describe('Testes de unidade do model de produtos', function () {
     // Assert
     expect(result).to.be.deep.equal(allProductsList);
   });
+
+  it('Recuperando uma pessoa passageira a partir do seu id', async function () {
+    // Arrange
+    sinon.stub(connection, 'execute').resolves([[allProductsList[0]]]);
+    // Act
+    const result = await productsModel.findById(1);
+    // Assert
+    expect(result).to.be.deep.equal(allProductsList[0]);
+  });
   afterEach(function () {
     sinon.restore();
   });
