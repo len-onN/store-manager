@@ -56,6 +56,7 @@ describe('listagem de produtos', function () {
     expect(result.type).to.equal(null);
     expect(result.message).to.deep.equal(allProductsList[0]);
   });
+  
   afterEach(function () {
     sinon.restore();
   });

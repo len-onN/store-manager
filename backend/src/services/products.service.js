@@ -17,11 +17,11 @@ const findById = async (productId) => {
   return { type: null, message: product };
 };
 
-const createNewProduct = async (name) => {
-  // const error = schema.validateNewProduct(name);
-  // if (error.type) return error;
+const createNewProduct = async (product) => {
+  // const error = schema.validateNewProduct({ name: product });
+  // if (error) return error;
 
-  const newProductId = await productsModel.insertNewProduct({ name });
+  const newProductId = await productsModel.insertNewProduct({ name: product });
   const newProduct = await productsModel.findById(newProductId);
 
   return { type: null, message: newProduct };

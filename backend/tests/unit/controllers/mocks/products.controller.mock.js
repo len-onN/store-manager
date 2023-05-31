@@ -12,16 +12,16 @@ const productsListMock = [
     name: 'Escudo do Capitão América',
   },
 ];
-const product = {
+const productMock = {
   name: 'Henrique Albuquerque',
 };
-const newProduct = {
+const newProductMock = {
   id: 4,
   name: 'Henrique Albuquerque',
 };
 
 module.exports = {
   productsListMock,
-  product,
-  newProduct,
+  productMock,
+  newProductMock,
 };

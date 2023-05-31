@@ -24,6 +24,15 @@ describe('Testes de unidade do model de produtos', function () {
     // Assert
     expect(result).to.be.deep.equal(allProductsList[0]);
   });
+  
+  it('Cadastrando uma produto', async function () {
+    // Arrange
+    sinon.stub(connection, 'execute').resolves([{ insertId: 10 }]);
+    // Act
+    const result = await productsModel.insertNewProduct({ name: 'Geraldina Heart' });
+    // Assert
+    expect(result).to.equal(10);
+  });
   afterEach(function () {
     sinon.restore();
   });
