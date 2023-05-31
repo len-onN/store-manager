@@ -1,4 +1,5 @@
 const connection = require('./connection');
+// const { getCurrentDateTime } = require('../utils/dateNow');
 
 const findAll = async () => {
   const [result] = await connection
@@ -22,7 +23,27 @@ const findById = async (salesId) => {
     return sale;
   };
 
+  const newSale = async () => {
+    const [{ insertId }] = await connection.execute(
+        'INSERT INTO sales (date) VALUE (DATE(NOW()))',
+    );
+    return insertId;
+};
+
+const salesProductsTb = async (insertId, productId, quantity) => {
+  await connection.execute(
+      'INSERT INTO sales_products (sale_id, product_id, quantity) VALUES (?, ?, ?)',
+      [insertId, productId, quantity],        
+  );
+  return {
+      productId,
+      quantity,
+  };
+};
+
 module.exports = {
   findAll,
   findById,
+  newSale,
+  salesProductsTb,
 };

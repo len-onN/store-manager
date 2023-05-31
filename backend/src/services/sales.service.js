@@ -17,7 +17,21 @@ const findById = async (saleId) => {
   return { type: null, message: sale };
 };
 
+const newSaleS = async (nSale) => {
+  const id = await salesModel.newSale();
+  const salePromise = nSale.map((sale) => salesModel
+    .salesProductsTb(id, sale.productId, sale.quantity));
+  const salePromisee = await Promise.all(salePromise);  
+  const obj = {
+    id,
+    itemsSold: salePromisee,
+};
+
+return obj;
+};
+
 module.exports = {
   findAll,
   findById,
+  newSaleS,
 };
