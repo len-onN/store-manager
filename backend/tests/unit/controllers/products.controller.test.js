@@ -6,7 +6,11 @@ const {
     productMock,
     newProductMock,
   } = require('./mocks/products.controller.mock');
-const { productKey } = require('../../../src/middlewares/productName.middleware');
+
+const {
+  productKey,
+  productLenghtName,
+} = require('../../../src/middlewares/productName.middleware');
 
 const { expect } = chai;
 chai.use(sinonChai);
@@ -69,6 +73,23 @@ describe('Listando e inserindo produtos - controller', function () {
       // Assert
       expect(res.status).to.have.been.calledWith(400);
       expect(res.json).to.have.been.calledWith({ message: '"name" is required' });
+    });
+    it('ao enviar name com menos que 5 caracteres retorna erro', async function () {
+      // Arrange
+      const res = {};
+      const req = {
+        body: { name: 'sad' },
+      };
+  
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+      
+      await productLenghtName(req, res);
+  
+      // Assert
+      expect(res.status).to.have.been.calledWith(422);
+      expect(res.json).to.have.been.calledWith({
+        message: '"name" length must be at least 5 characters long' });
     });
     
     afterEach(function () {
