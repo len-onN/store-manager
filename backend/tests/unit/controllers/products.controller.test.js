@@ -91,6 +91,54 @@ describe('Listando e inserindo produtos - controller', function () {
       expect(res.json).to.have.been.calledWith({
         message: '"name" length must be at least 5 characters long' });
     });
+
+    it('Ao atualizar produto retorna o status 200 e o produto', async function () {
+      // arrange
+      const res = {};
+      const req = {
+        body: { name: 'nameok' },
+        params: 1,
+      };
+      
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+      sinon
+        .stub(productsService, 'findById')
+        .resolves({ type: null, message: { id: 1, name: 'nameok' } });
+      sinon
+        .stub(productsService, 'reProduct')
+        .resolves();
+      // act
+      await productsController.reProduct(req, res);
+
+      // assert
+      expect(res.status).to.have.been.calledWith(200);
+      expect(res.json).to.have.been.calledWith({ id: 1, name: 'nameok' });
+    });
+
+    it('Ao atualizar produto inexistente retorna status 400 e mensagem', async function () {
+      // arrange
+      const res = {};
+      const req = {
+        body: { name: 'nameok' },
+        params: 999,
+      };
+      
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+      sinon
+        .stub(productsService, 'findById')
+        .resolves({ type: 'PRODUCT_NOT_FOUND', message: 'Product not found' });
+      sinon
+        .stub(productsService, 'reProduct')
+        .resolves();
+      // act
+      await productsController.reProduct(req, res);
+
+      // assert
+      expect(res.status).to.have.been.calledWith(404);
+      expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
+    });
     
     afterEach(function () {
       sinon.restore();

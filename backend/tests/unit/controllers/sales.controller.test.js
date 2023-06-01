@@ -18,7 +18,7 @@ const {
 const { salesController } = require('../../../src/controllers');
 const { salesService } = require('../../../src/services');
 
-describe('Testando middlewares do post em sales', function () {
+describe('Testando sales', function () {
   it('Testando condição para quantity inexistente', async function () {
     // Arrange
     const res = {};
