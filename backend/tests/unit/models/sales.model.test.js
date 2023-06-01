@@ -24,6 +24,15 @@ describe('Testes de unidade do model de compras', function () {
     // Assert
     expect(result).to.be.deep.equal(allSalesList[0]);
   });
+
+  it('gerando nova compra e retornando saleId', async function () {
+    // Arrange
+    sinon.stub(connection, 'execute').resolves([{ insertId: 1 }]);
+    // Act
+    const result = await salesModel.newSale([{ productId: 1, quantity: 1 }]);
+    // Assert
+    expect(result).to.be.deep.equal(1);
+  });
   afterEach(function () {
     sinon.restore();
   });

@@ -6,9 +6,15 @@ const { salesController: {
   getSale,
   createNewSale,
 } } = require('../controllers');
+const {
+  isProductId,
+  isQuantity,
+  isMinQuantity,
+  isProductIdValue,
+} = require('../middlewares/sales.middleware');
 
 router.get('/:id', getSale);
 router.get('/', listSales);
-router.post('/', createNewSale);
+router.post('/', isProductId, isProductIdValue, isMinQuantity, isQuantity, createNewSale);
 
 module.exports = router;
