@@ -27,8 +27,17 @@ const createNewProduct = async (product) => {
   return { type: null, message: newProduct };
 };
 
+const reProduct = async (id, name) => {
+  const /* [{ info }] */ result = await productsModel.reProduct(id, name);
+  if (result[0].info === 'Rows matched: 0  Changed: 0  Warnings: 0') {
+    return { type: 'NOT_FOUND', message: 'Product Not Found' };
+  }
+  return result;
+};
+
 module.exports = {
   findAll,
   findById,
   createNewProduct,
+  reProduct,
 };
