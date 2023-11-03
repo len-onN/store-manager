@@ -8,3 +8,14 @@ Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua cr
 - quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
 - quais arquivos/pastas foram desenvolvidos pela Trybe.
 -->
+```bash
+# Instale as dependências
+npm install
+
+# Inicie os containers do compose `backend` e `db`
+# A aplicação estará disponível em `http://localhost:3001` em modo de desenvolvimento
+docker-compose up -d
+
+# É possível ver os logs da aplicação com `docker logs -n 20 -f <nome-do-container>`
+docker logs -n 20 -f store_manager
+```
